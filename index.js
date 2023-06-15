@@ -1,12 +1,19 @@
 import jsonServer from "json-server";
 import config from './utils/config.js'
-const server = jsonServer.create();
 import data from './db.js'
-const router = jsonServer.router(data);
-const middlewares = jsonServer.defaults();
 import { removePrivateField }  from './utils/common.js'
 import {authRoute} from './routes/auth.js'
+import cors from 'cors'
 
+const corsOptions = {
+  origin: ['https://neos.sebastientraber.com'],
+}
+
+const server = jsonServer.create();
+const router = jsonServer.router(data);
+const middlewares = jsonServer.defaults();
+
+server.use(cors(corsOptions))
 server.use(jsonServer.bodyParser)
 
 server.post('/auth', authRoute(router))
