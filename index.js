@@ -4,14 +4,16 @@ import data from './db.js'
 import { removePrivateField } from './utils/common.js'
 import { authRoute } from './routes/auth.js'
 import cors from 'cors'
+import authMiddleware from './middlewares/auth.js'
 
 
 const corsOptions = {
-  origin: 'https://neos.sebastientraber.com',
+  origin: ['http://localhost:4200', 'https//neos.sebastientraber.com']
 }
 const apiPrefix = `/${config.apiName}`
 
 const server = jsonServer.create();
+server.use(cors(corsOptions))
 const router = jsonServer.router(data);
 const middlewares = jsonServer.defaults();
 
@@ -21,14 +23,13 @@ server.post(`${apiPrefix}/auth`, authRoute(router))
 
 router.render = (req, res) => {
   let data = res.locals.data
-  if (data?.length ?? 0 > 0) data = removePrivateField(data)
-   res.jsonp(data)
+  data = removePrivateField(data)
+  res.jsonp(data)
 };
 
-server.use(cors(corsOptions))
 server.use(middlewares);
-// server.use(auth);
-server.use(apiPrefix,router);
+server.use(authMiddleware);
+server.use(apiPrefix, router);
 server.listen(config.port, () => {
   console.log(`JSON Server is running on port ${config.port}`);
 });

@@ -1,6 +1,7 @@
 import faker from './config.js'
 import { subtractYears } from './../utils/common.js'
 const MAX = 100
+const ROLES = ['msp', 'dc']
 
 const collaborators = []
 
@@ -16,6 +17,7 @@ for (let i = 0; i < MAX; i++) {
       _password: id,
       email: `${this.firstName}.${this.lastName}@orif.ch`,
       birthday: subtractYears(new Date(faker.date.past({ years: 40 })), 20),
+      role: ROLES[Math.floor(Math.random() * ROLES.length)],
     }
   }
 

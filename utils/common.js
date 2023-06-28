@@ -7,12 +7,20 @@ export function send(res, body, status) {
 }
 
 export function removePrivateField(data) {
-  return  data.map((obj) =>
-    Object.entries(obj).reduce((acc, [key, value]) => {
-      if (!key.startsWith('_')) {
-        acc[key] = value;
-      }
-      return acc;
-    }, {})
-  );
+  if (!data) return data
+  if (data?.length > 0 ?? 0) {
+    return data.map((obj) => removeField("_", obj))
+  }
+  if (typeof data === "object" && data !== null) {
+    return removeField("_", data)
+  }
 };
+
+function removeField(startWith, obj) {
+  return Object.entries(obj).reduce((acc, [key, value]) => {
+    if (!key.startsWith(startWith)) {
+      acc[key] = value;
+    }
+    return acc;
+  }, {})
+}
