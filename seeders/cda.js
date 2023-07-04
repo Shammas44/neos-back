@@ -1,3 +1,5 @@
+import { setRow, TYPES as T } from './../utils/common.js'
+
 const cda = [
   { cda: 1000, name: "Trésorerie" },
   { cda: 1010, name: "Banque principale" },
@@ -50,4 +52,15 @@ const cda = [
   { cda: 9080, name: "Frais de bureau" },
   { cda: 9090, name: "Autres charges" },
 ]
-export default cda
+
+const data = []
+for (const item of cda) {
+
+  data.push(
+    {
+      cda: setRow(item.cda, 'cda', T.NUMBER),
+      name: setRow(item.name, 'nom', T.STRING)
+    }
+  )
+}
+export default data
