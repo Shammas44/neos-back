@@ -18,15 +18,18 @@ for (let i = 0; i < MAX; i++) {
     const email = `${this.firstName}.${this.lastName}@orif.ch`
 
     return {
-      id: setRow(id, 'identifiant', T.STRING),
-      firstName: setRow(this.firstName, 'prénom', T.STRING),
-      lastName: setRow(this.lastName, 'nom', T.STRING),
-      telephone: setRow(faker.phone.number(), 'téléphone', T.PHONE),
-      _password: setRow(id, '', T.STRING),
-      email: setRow(email, 'email', T.EMAIL),
-      birthday: setRow(birthday, 'anniversaire', T.BIRTHDAY),
-      role: setRow([role], 'rôle', T.TAGS),
-      presence: setRow([presence], 'Présence', T.PRESENCE),
+      id: id,
+      data: {
+        orifId: setRow(id, 'identifiant', T.STRING),
+        firstName: setRow(this.firstName, 'prénom', T.STRING),
+        lastName: setRow(this.lastName, 'nom', T.STRING),
+        telephone: setRow(faker.phone.number(), 'téléphone', T.PHONE),
+        _password: setRow(id, '', T.STRING),
+        email: setRow(email, 'email', T.EMAIL),
+        birthday: setRow(birthday, 'anniversaire', T.BIRTHDAY),
+        role: setRow([role], 'rôle', T.TAGS),
+        presence: setRow([presence], 'Présence', T.PRESENCE),
+      }
     }
   }
 

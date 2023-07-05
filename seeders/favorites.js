@@ -62,15 +62,17 @@ let lastId = 0;
 function getFavorites(userId) {
 
   const results = []
-  for (const favorite of favorites) {
-    const tag = TAG[randomNumber(0, TAG.length -1)]
-    const id = lastId++
+  for (const favorite of favorites.entries()) {
+    const tag = TAG[randomNumber(0, TAG.length - 1)]
+    lastId++
     results.push({
-      id: setRow(id, 'identifiant', T.STRING),
-      name: setRow(favorite.name, 'nom', T.STRING),
-      url: setRow(favorite.url, 'url', T.STRING),
-      userId: setRow(userId, 'identifiant du collaborateur', T.TAGS),
-      tag: setRow([tag], 'tag', T.TAGS),
+      id: String(lastId),
+      data: {
+        name: setRow(favorite.name, 'nom', T.STRING),
+        url: setRow(favorite.url, 'url', T.STRING),
+        userId: setRow(userId, 'identifiant du collaborateur', T.TAGS),
+        tag: setRow([tag], 'tag', T.TAGS),
+      }
     })
   }
   return results

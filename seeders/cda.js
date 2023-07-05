@@ -58,8 +58,11 @@ for (const item of cda) {
 
   data.push(
     {
-      cda: setRow(item.cda, 'cda', T.NUMBER),
-      name: setRow(item.name, 'nom', T.STRING)
+      id: cda.cda,
+      data: {
+        cda: setRow(item.cda, 'cda', T.NUMBER),
+        name: setRow(item.name, 'nom', T.STRING)
+      }
     }
   )
 }

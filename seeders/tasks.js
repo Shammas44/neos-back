@@ -70,12 +70,14 @@ function getTask(userId) {
   })).getTime()
 
   return {
-    id: setRow(id, 'identifiant', T.STRING),
-    collaboratorId: setRow(userId, 'identifiant du collaborateur', T.STRING),
-    description: setRow(task, 'description', T.STRING),
-    concerns: setRow(concerns, 'personnes impliquée', T.TAGS),
-    term: setRow(term, 'échéances', T.TERM),
-    completionTimestamp: setRow('null', 'date de complétion', T.TIMESTAMP)
+    id: id,
+    data: {
+      collaboratorId: setRow(userId, 'identifiant du collaborateur', T.STRING),
+      description: setRow(task, 'description', T.STRING),
+      concerns: setRow(concerns, 'personnes impliquée', T.TAGS),
+      term: setRow(term, 'échéances', T.TERM),
+      completionTimestamp: setRow('null', 'date de complétion', T.TIMESTAMP)
+    }
   }
 }
 
