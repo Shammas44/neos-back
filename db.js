@@ -6,8 +6,8 @@ import getFavorite from './seeders/favorites.js'
 const tasks = []
 const favorites = []
 collaborators.forEach((c) => {
-  tasks.push(...[...Array(25).keys()].map(() => getTask(c.id.value)))
-  favorites.push(...getFavorite(c.id.value))
+  tasks.push(...[...Array(25).keys()].map(() => getTask(c.id)))
+  favorites.push(...getFavorite(c.id))
 })
 
 export default {

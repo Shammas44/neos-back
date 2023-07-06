@@ -7,6 +7,7 @@ export function send(res, body, status) {
 }
 
 export function removePrivateField(data) {
+  if (Object.keys(data).length === 0) return data;
   if (!data) return data
   if (data?.length > 0 ?? 0) {
     data.map((obj) => removeField("_", obj))

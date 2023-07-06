@@ -62,7 +62,7 @@ let lastId = 0;
 function getFavorites(userId) {
 
   const results = []
-  for (const favorite of favorites.entries()) {
+  for (const favorite of favorites) {
     const tag = TAG[randomNumber(0, TAG.length - 1)]
     lastId++
     results.push({
