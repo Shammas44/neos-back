@@ -10,8 +10,7 @@ export function removePrivateField(data) {
   if (Object.keys(data).length === 0) return data;
   if (!data) return data
   if (data?.length > 0 ?? 0) {
-    data.map((obj) => removeField("_", obj))
-    return data
+    return data.map((obj) => removeField("_", obj))
   }
   if (typeof data === "object" && data !== null) {
     return removeField("_", data)
@@ -19,20 +18,19 @@ export function removePrivateField(data) {
 };
 
 function removeField(startWith, obj) {
-  const data = obj.data
-  const properties = Object.entries(data).reduce((acc, [key, value]) => {
+  const properties = Object.entries(obj).reduce((acc, [key, value]) => {
     if (!key.startsWith(startWith)) {
       acc[key] = value;
     }
     return acc;
   }, {})
-  obj.data = properties
-  return obj
+  return properties
 }
 
 
 export const TYPES = {
   STRING: 'string',
+  BOOLEAN: 'boolean',
   DATE: 'date',
   NUMBER: 'number',
   TAGS: 'tags',
@@ -43,10 +41,13 @@ export const TYPES = {
   PRESENCE: 'presence',
   MONEY: 'money',
   TERM: 'term',
-  TIMESTAMP: 'timestamp'
+  TIMESTAMP: 'timestamp',
+  ISNEW: 'isnew',
+  PRIORITY: 'priority',
+  ACTION: 'action'
 }
 
-export function setRow(value, label, type) {
+export function setRow(value, type) {
   if (!Object.values(TYPES).includes(type)) throw new Error(`Type ${type} is not supported`)
   if (Array.isArray(value)) {
     value = value.map((v) => {
@@ -55,7 +56,7 @@ export function setRow(value, label, type) {
   } else if (typeof value != 'string') {
     value = String(value)
   }
-  return { value, label, type }
+  return { value, type }
 }
 
 export function pickUniqRandom(number, list) {

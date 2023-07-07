@@ -1,5 +1,6 @@
+import { pickUniqRandom } from '../utils/common.js';
+import { randomNumber } from '../utils/common.js';
 import faker from './config.js'
-import { setRow, TYPES as T, randomNumber, pickUniqRandom } from './../utils/common.js'
 
 const tasks = [
   "Élaboration de programmes de formation",
@@ -71,13 +72,11 @@ function getTask(userId) {
 
   return {
     id: id,
-    data: {
-      collaboratorId: setRow(userId, 'identifiant du collaborateur', T.STRING),
-      description: setRow(task, 'description', T.STRING),
-      concerns: setRow(concerns, 'personnes impliquée', T.TAGS),
-      term: setRow(term, 'échéances', T.TERM),
-      completionTimestamp: setRow('null', 'date de complétion', T.TIMESTAMP)
-    }
+    collaboratorId: userId,
+    description: task,
+    concerns: concerns,
+    term: term,
+    completionTimestamp: 'null',
   }
 }
 

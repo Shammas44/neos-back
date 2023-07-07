@@ -2,6 +2,7 @@ import collaborators from './seeders/collaborators.js'
 import cda from './seeders/cda.js'
 import getTask from './seeders/tasks.js'
 import getFavorite from './seeders/favorites.js'
+import news from './seeders/news.js'
 
 const tasks = []
 const favorites = []
@@ -12,7 +13,8 @@ collaborators.forEach((c) => {
 
 export default {
   collaborators: collaborators,
-  cda: cda,
+  cda,
   tasks,
   favorites,
+  newsheaders: news.headers
 }

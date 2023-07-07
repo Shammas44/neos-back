@@ -1,5 +1,4 @@
-import { setRow, TYPES as T, randomNumber } from './../utils/common.js'
-
+import { randomNumber } from '../utils/common.js'
 const favorites = [
   {
     name: 'Google Developers',
@@ -67,12 +66,10 @@ function getFavorites(userId) {
     lastId++
     results.push({
       id: String(lastId),
-      data: {
-        name: setRow(favorite.name, 'nom', T.STRING),
-        url: setRow(favorite.url, 'url', T.STRING),
-        userId: setRow(userId, 'identifiant du collaborateur', T.TAGS),
-        tag: setRow([tag], 'tag', T.TAGS),
-      }
+      name: favorite.name,
+      url: favorite.url,
+      userId: userId,
+      tag: [tag],
     })
   }
   return results
