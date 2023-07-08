@@ -1,62 +1,16 @@
 import faker from './config.js'
 import { SITES_OBJECT, ROLES_OBJECT } from '../data/common.js'
 import { randomNumber } from '../utils/common.js';
-const TAG = {
-  SUPPORT: 'support',
-  INVITATION: 'invitation',
-  FORMATION: 'formation',
-  INFORMATION: 'information',
-  EMPLOI: 'emploi',
-  EQUIPE: 'équipe',
-  BLUEWORD: 'mots bleu'
-}
-
-const rawNews = [
-  {
-    title: "Nouveau projet",
-    tag: [TAG.BLUEWORD]
-  },
-  {
-    title: "Réunion d'équipe",
-    tag: [TAG.EQUIPE]
-  },
-  {
-    title: "Rappel de réunion",
-    tag: [TAG.SUPPORT]
-  },
-  {
-    title: "Rapport mensuel",
-    tag: [TAG.INFORMATION]
-  },
-  {
-    title: "Information importante",
-    tag: [TAG.INFORMATION]
-  },
-  {
-    title: "Changement de politique interne",
-    tag: [TAG.INFORMATION]
-  },
-  {
-    title: "Invitation à l'événement",
-    tag: [TAG.INVITATION]
-  },
-  {
-    title: "Maintenance des serveurs",
-    tag: [TAG.SUPPORT]
-  },
-  {
-    title: "Information sur les avantages sociaux",
-    tag: [TAG.INFORMATION]
-  }
-];
+import allNews from '../data/news.js'
+import generateTemplate from '../data/newsTemplate.js'
 
 const Priority = ['high', 'normal']
 let lastId = 0;
 
 const headers = []
-const html = []
+const body = []
 
-for (const rawNew of rawNews) {
+for (const news of allNews) {
   const currentMonth = new Date().getDate()
   const date = (faker.date.between({
     from: new Date().setDate(currentMonth - 30),
@@ -72,18 +26,26 @@ for (const rawNew of rawNews) {
   headers.push({
     id: String(lastId),
     isNew: String(Boolean(randomNumber(0, 1))),
-    object: rawNew.title,
+    object: news.title,
     priority: Priority[randomNumber(0, 1)],
-    tags: rawNew.tag,
+    tags: news.tag,
     date: String(date),
-    newsId: String(lastId),
+    _bodyId: String(lastId),
     term: String(term),
     sites: [sites[randomNumber(0, 1)]],
     role: [roles[randomNumber(0, 2)]],
   })
 
+  const n = news.content
+  const content = generateTemplate(n.greeting, n.body, n.goodbye, news.title)
+
+  body.push({
+    id: String(lastId),
+    body: content,
+  })
+
 }
 
-const news = { headers }
+const newsObject = { headers, body }
 
-export default news
+export default newsObject

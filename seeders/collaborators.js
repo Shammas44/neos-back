@@ -17,11 +17,10 @@ for (let i = 0; i < MAX; i++) {
 
     return {
       id: id,
-      orifId: id,
       firstName: this.firstName,
       lastName: this.lastName,
       telephone: faker.phone.number(),
-      _password: id,
+      __password: id,
       email: email,
       birthday: String(birthday),
       role: [role],

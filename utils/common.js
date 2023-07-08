@@ -10,10 +10,10 @@ export function removePrivateField(data) {
   if (Object.keys(data).length === 0) return data;
   if (!data) return data
   if (data?.length > 0 ?? 0) {
-    return data.map((obj) => removeField("_", obj))
+    return data.map((obj) => removeField("__", obj))
   }
   if (typeof data === "object" && data !== null) {
-    return removeField("_", data)
+    return removeField("__", data)
   }
 };
 

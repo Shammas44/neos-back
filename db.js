@@ -16,5 +16,6 @@ export default {
   cda,
   tasks,
   favorites,
-  newsheaders: news.headers
+  newsheaders: news.headers,
+  newsbody: news.body
 }
