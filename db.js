@@ -5,6 +5,7 @@ import getFavorite from './seeders/favorites.js'
 import news from './seeders/news.js'
 import bills from './seeders/bills.js'
 import accounts from './seeders/accounts.js'
+import beneficiaries from './seeders/beneficiaries.js'
 
 const tasks = []
 const favorites = []
@@ -22,4 +23,5 @@ export default {
   newsheaders: news.headers,
   newsbody: news.body,
   accounts,
+  beneficiaries,
 }
