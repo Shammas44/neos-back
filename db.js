@@ -3,6 +3,8 @@ import cda from './seeders/cda.js'
 import getTask from './seeders/tasks.js'
 import getFavorite from './seeders/favorites.js'
 import news from './seeders/news.js'
+import bills from './seeders/bills.js'
+import accounts from './seeders/accounts.js'
 
 const tasks = []
 const favorites = []
@@ -16,6 +18,8 @@ export default {
   cda,
   tasks,
   favorites,
+  bills,
   newsheaders: news.headers,
-  newsbody: news.body
+  newsbody: news.body,
+  accounts,
 }

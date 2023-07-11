@@ -6,9 +6,9 @@ import { authRoute } from './routes/auth.js'
 import cors from 'cors'
 import authMiddleware from './middlewares/auth.js'
 
-
 const corsOptions = {
-  origin: ['http://localhost:4200', 'https//neos.sebastientraber.com']
+  origin: ['http://localhost:4200', 'https//neos.sebastientraber.com'],
+  exposedHeaders: ['data-timestamp']
 }
 const apiPrefix = `/${config.apiName}`
 
@@ -22,6 +22,7 @@ server.use(jsonServer.bodyParser)
 server.post(`${apiPrefix}/auth`, authRoute(router))
 
 router.render = (req, res) => {
+  res.set('data-timestamp', config.date)
   let data = res.locals.data
   data = removePrivateField(data)
   res.jsonp(data)

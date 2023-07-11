@@ -4,6 +4,7 @@ import debug from 'debug';
 dotenv.config();
 
 const config = {
+  date: Date.now(),
   port: normalizePort(process.env.PORT || '3000'),
   apiName: process.env.API_NAME || 'api',
   secretKey: process.env.SECRET_KEY,
