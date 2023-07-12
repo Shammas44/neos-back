@@ -19,7 +19,7 @@ for (let i = 0; i < MAX; i++) {
       id: id,
       firstName: this.firstName,
       lastName: this.lastName,
-      telephone: faker.phone.number(),
+      phone: faker.phone.number('+41 ## ### ## ##'),
       __password: id,
       email: email,
       birthday: String(birthday),

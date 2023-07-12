@@ -58,13 +58,14 @@ for (const site of SITES_ARRAY) {
     const startDate = decision + (month * 3)
     const endDate = startDate + (month * 36)
     const civility = pickUniqRandom(1, CIVILITY)[0]
-    const name = civility == civility[0] 
-      ? `${faker.person.firstName('male')} ${faker.person.lastName()}` 
+    const name = civility == civility[0]
+      ? `${faker.person.firstName('male')} ${faker.person.lastName()}`
       : `${faker.person.firstName('female')} ${faker.person.lastName()}`
 
     beneficiaries.push({
       id: String(i + 1000),
       name: name,
+      phone: faker.phone.number('+41 ## ### ## ##'),
       status3: pickUniqRandom(1, STATUS3)[0],
       avs: createAvsNumber(),
       civility: civility,
@@ -74,21 +75,19 @@ for (const site of SITES_ARRAY) {
       startDate: String(startDate),
       endDate: String(endDate),
       siteName: site,
-      OAI: pickUniqRandom(1, OAI)[0],
+      oai: pickUniqRandom(1, OAI)[0],
       orifProduct: pickUniqRandom(1, PRODUCT)[0],
       section: pickUniqRandom(1, SECTION)[0],
       accommodation: createAccomodation(),
       originCountry: pickUniqRandom(1, COUNTRY)[0],
       permit: pickUniqRandom(1, PERMIT)[0],
-      staff: {
-        MSP: pickUniqRandom(1, MSP)[0],
-        RS: pickUniqRandom(1, RS)[0],
-        psychologist: pickUniqRandom(1, PSYCHOLOGIST)[0],
-        SI: pickUniqRandom(1, SI)[0],
-        COFOR: pickUniqRandom(1, COFOR)[0],
-        legalRepresentative: pickUniqRandom(1, LEGALREPRESENTATIVE)[0],
-        advisor: pickUniqRandom(1, ADVISOR)[0],
-      },
+      msp: pickUniqRandom(1, MSP)[0],
+      rs: pickUniqRandom(1, RS)[0],
+      psychologist: pickUniqRandom(1, PSYCHOLOGIST)[0],
+      si: pickUniqRandom(1, SI)[0],
+      cofor: pickUniqRandom(1, COFOR)[0],
+      legalRepresentative: pickUniqRandom(1, LEGALREPRESENTATIVE)[0],
+      advisor: pickUniqRandom(1, ADVISOR)[0],
     })
   }
 }
