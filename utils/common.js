@@ -59,17 +59,18 @@ export function setRow(value, type) {
   return { value, type }
 }
 
-export function pickUniqRandom(number, list) {
-  let uniq = []
-  let i = 0
-  while (i < number) {
-    let index = Math.floor(Math.random() * list.length)
-    if (!uniq.includes(index)) {
-      uniq.push(index)
-      i++
-    }
+export function pickUniqRandom(array, count) {
+  if (count > array.length) {
+    throw new Error('Count cannot be greater than the array length');
   }
-  return uniq.map((i) => list[i])
+  const copiedArray = [...array];
+  const selectedEntries = [];
+  while (selectedEntries.length < count) {
+    const randomIndex = Math.floor(Math.random() * copiedArray.length);
+    const entry = copiedArray.splice(randomIndex, 1)[0];
+    selectedEntries.push(entry);
+  }
+  return selectedEntries;
 }
 
 export function randomNumber(min, max) {

@@ -61,7 +61,7 @@ const ROLES = ['msp', 'dc', 'rmg', 'dfa', 'rca']
 let lastId = 0;
 
 function getTask(userId) {
-  const concerns = pickUniqRandom(randomNumber(1, 3), ROLES)
+  const concerns = pickUniqRandom(ROLES,randomNumber(1, 3))
   const task = tasks[Math.floor(Math.random() * tasks.length)]
   const id = lastId++
   const currentMonth = new Date().getDate()

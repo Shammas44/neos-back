@@ -1,3 +1,4 @@
+import {SECTIONS} from "../data/common.js";
 const cda = [
   { cda: "1000", name: "Trésorerie" },
   { cda: "1010", name: "Banque principale" },
@@ -61,4 +62,15 @@ for (const item of cda) {
     }
   )
 }
+
+const base = Number(cda[cda.length -1].cda) + 10
+SECTIONS.forEach((section,i)=>{
+  const name = section.toLowerCase()
+  data.push(
+    {
+      id: String(base + (i * 10)),
+      name: `Section ${name}`
+    }
+  )
+})
 export default data
