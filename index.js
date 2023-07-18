@@ -7,7 +7,7 @@ import cors from 'cors'
 import authMiddleware from './middlewares/auth.js'
 
 const corsOptions = {
-  origin: ['http://localhost:4200', 'https//neos.sebastientraber.com'],
+  origin:  'https//neos.sebastientraber.com',
   exposedHeaders: ['data-timestamp']
 }
 const apiPrefix = `/${config.apiName}`
