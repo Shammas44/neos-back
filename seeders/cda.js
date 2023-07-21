@@ -1,5 +1,7 @@
-import {SECTIONS} from "../data/common.js";
-const cda = [
+import { SECTIONS } from "../data/common.js";
+import faker from './config.js'
+
+export const cda = [
   { cda: "1000", name: "Trésorerie" },
   { cda: "1010", name: "Banque principale" },
   { cda: "1020", name: "Banque secondaire" },
@@ -59,17 +61,22 @@ for (const item of cda) {
     {
       id: item.cda,
       name: item.name,
+      isSection: false,
     }
   )
 }
 
-const base = Number(cda[cda.length -1].cda) + 10
-SECTIONS.forEach((section,i)=>{
-  const name = section.toLowerCase()
+const base = Number(cda[cda.length - 1].cda) + 10
+SECTIONS.forEach((section, i) => {
+  const name = section[0].toLowerCase()
   data.push(
     {
       id: String(base + (i * 10)),
-      name: `Section ${name}`
+      name: `Section ${name}`,
+      isSection: String(true),
+      customerInvoiceBudget: String(faker.number.int({ min: 30000, max: 100000 })),
+      internerBudget: String(faker.number.int({ min: 2000, max: 40000 })),
+      site: section[1]
     }
   )
 })

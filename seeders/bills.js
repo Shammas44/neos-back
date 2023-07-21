@@ -4,25 +4,38 @@ import { pickUniqRandom } from '../utils/common.js'
 import cdaList from './cda.js'
 import { SITES_ARRAY } from '../data/common.js'
 import { SECTIONS } from '../data/common.js';
+import { cda } from './cda.js'
 
-function createParties() {
+const nonSectionCdaLength = cda.length
+const nonSectionCda = cdaList.slice(0, nonSectionCdaLength - 1)
+const sectionCda = cdaList.slice(nonSectionCdaLength, -1)
+
+function createParties(isSection) {
   const bool = faker.datatype.boolean()
   const company = faker.company.name()
   let parties = { debtor: company, creditor: company }
-  bool ? parties.debtor = 'Orif' : parties.creditor = 'Orif'
+  if (!isSection) bool ? parties.creditor = 'Orif' : parties.debtor = 'Orif'
+  if (isSection) {
+    if (faker.datatype.boolean()) {
+      bool ? parties.creditor = 'Orif' : parties.debtor = 'Orif'
+    } else {
+      [parties.debtor, parties.creditor] = ['Orif', 'Orif']
+    }
+  }
   return parties
 }
 
 function createBill(i, site) {
+  const cda = i % 2 == 0 ? pickUniqRandom(nonSectionCda, 1)[0] : pickUniqRandom(sectionCda, 1)[0]
   const account = pickUniqRandom(accounts, 1)[0]
-  const cda = pickUniqRandom(cdaList, 1)[0]
+  const isSection = cda.name.startsWith('Section ')
 
   const sum = cda.name.startsWith('Section ')
     ? faker.finance.amount(100, 400, 2)
     : faker.finance.amount(100, 8000, 2)
 
-  const parties = createParties()
-  const days = faker.number.int({ min: 1, max: 60 })
+  const parties = createParties(isSection)
+  const days = faker.number.int({ min: 1, max: 300 })
   const term = faker.datatype.boolean()
     ? faker.date.recent({ days: days }).getTime()
     : faker.date.soon({ days: days }).getTime()
@@ -45,12 +58,12 @@ function createBill(i, site) {
     description: faker.lorem.lines(1),
     sum: sum,
     acquittedOn: acquittedOn,
-    section: cda.name.startsWith('Section ') ? cda.name : ''
+    section: String(isSection)
   }
 }
 const bills = []
 for (const [key, site] of SITES_ARRAY.entries()) {
-  for (let i = 0; i < 500; i++) {
+  for (let i = 0; i < 1000; i++) {
     bills.push(createBill((1000 * key) + i, site[0]))
   }
 }
