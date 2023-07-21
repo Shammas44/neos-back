@@ -1,8 +1,10 @@
-export const ROLES_ARRAY = ['msp', 'dc']
+export const ROLES_ARRAY = ['msp', 'dc','admin']
+import faker from '../seeders/config.js'
 
 export const ROLES_OBJECT = {
   MSP: ROLES_ARRAY[0],
   DC: ROLES_ARRAY[1],
+  ADMIN: ROLES_ARRAY[2],
   ALL: 'all',
 }
 
@@ -33,4 +35,45 @@ export const SITES_OBJECT = {
   ALL: 'all',
 }
 
-export const SECTIONS = ["Horlogerie", "Electricité", "Vente", "Mécanique", "Dessin architecture", "Dessin industriel", "Informatique", "Logistique", "Cuisine", "Restauration", "Boulangerie", "Pâtisserie", "Horticulture", "Maçonnerie", "Peinture", "Carrelage", "Menuiserie", "Soudure", "Mécanique automobile", "Mécanique agricole"]
+export let sections = [
+  "Horlogerie",
+  "Electricité",
+  "Vente",
+  "Mécanique",
+  "Dessin architecture",
+  "Dessin industriel",
+  "Informatique",
+  "Support informatique",
+  "Multimédia",
+  "Logistique",
+  "Cuisine",
+  "Restauration",
+  "Boulangerie",
+  "Pâtisserie",
+  "Horticulture",
+  "Maçonnerie",
+  "Peinture",
+  "Paysagisme",
+  "Installation sanitaire",
+  "Service restauration",
+  "Soins et accompagnement",
+  "Carrelage",
+  "Menuiserie",
+  "Soudure",
+  "Géomatique",
+  "construction métallique",
+  "Mécanique automobile",
+  "Mécanique agricole",
+  "Mécanique poids lourd",
+]
+
+export const SECTIONS = []
+for (const site of SITES_ARRAY) {
+  for (let i = 0; i < 6; i++) {
+    const sectionId = faker.number.int({ min: 1, max: sections.length - 1 })
+    const section = sections[sectionId]
+    const siteName = site[0].charAt(0).toUpperCase() + site[0].slice(1)
+    const name = `${section} - ${siteName}`
+    SECTIONS.push([name, site[0]])
+  }
+}
