@@ -5,6 +5,15 @@ const MAX = 100
 const PRESENCE = ['présent', 'absent', 'congé']
 
 const collaborators = []
+export const dashboards = []
+
+function createDashboard(id){
+  return {
+    id,
+    timestamp: Date.now(),
+    dashboard:{}
+  }
+}
 
 function getCollaboratorFactory(firstName, lastName, optionalRole) {
   return {
@@ -43,6 +52,10 @@ const users = [
 
 users.forEach((user)=>{
 collaborators.push(getCollaboratorFactory(...user).getCollaborator())
+})
+
+collaborators.forEach((collaborator)=>{
+  dashboards.push(createDashboard(collaborator.id))
 })
 
 export default collaborators

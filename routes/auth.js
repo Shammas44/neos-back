@@ -16,7 +16,8 @@ export function authRoute(router) {
     const token = useAuth.generateJwtToken(user.id, false)
     if (!token)
       return send(res, MSG.ERROR_TOKEN_GENERATION , 500)
-    const data = { ...token, ...user }
+    const dashboard = router.db.get('dashboards').find({id:user.id}).value()
+    const data = { ...token, ...user, data:dashboard }
     res.locals.data = data
     next()
   }
