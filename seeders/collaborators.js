@@ -1,8 +1,11 @@
 import faker from './config.js'
 import { ROLES_ARRAY, SITES_ARRAY, ROLES_OBJECT } from '../data/common.js'
+import { pickUniqRandom } from '../utils/common.js';
+import config from '../utils/config.js'
 
 const MAX = 100
 const PRESENCE = ['présent', 'absent', 'congé']
+const SEX = ["h", "f"]
 
 const collaborators = []
 export const dashboards = []
@@ -15,10 +18,20 @@ function createDashboard(id){
   }
 }
 
-function getCollaboratorFactory(firstName, lastName, optionalRole) {
+function getCollaboratorFactory(sex,firstName, lastName, optionalRole) {
+       sex = pickUniqRandom(SEX, 1)[0]|| sex
+      const pictureId = faker.number.int({ min: 1, max: 12 })
+      const picture = sex == 'h' 
+        ? `${config.domain}avatars/avatar-m-${pictureId}@2x.png` 
+        : `${config.domain}avatars/avatar-f-${pictureId}@2x.png`
+      const randomFirstName = sex == sex[0]
+        ? faker.person.firstName('male')
+        : faker.person.firstName('female')
+
   return {
-    firstName: firstName || faker.person.firstName(),
+    firstName: firstName || randomFirstName,
     lastName: lastName || faker.person.lastName(),
+    picture,
     getCollaborator: function() {
       const id = `${this.firstName[0]}${this.firstName[1]}${this.lastName[0]}${this.lastName[1]}`.toLowerCase()
       const birthday = faker.date.past({ years: 40, refDate: "2003-01-01T00:00:00.000Z" }).getTime()
@@ -35,6 +48,7 @@ function getCollaboratorFactory(firstName, lastName, optionalRole) {
         email: email,
         birthday: String(birthday),
         role: [role],
+        picture:this.picture,
         presence: [presence],
         site: [SITES_ARRAY[faker.number.int({ min: 0, max: SITES_ARRAY.length - 1 })][0]],
       }
@@ -47,7 +61,7 @@ for (let i = 0; i < MAX; i++) {
 }
 
 const users = [
-  ['Admin', 'Admin', ROLES_OBJECT.ADMIN]
+  ['h','Admin', 'Admin', ROLES_OBJECT.ADMIN]
 ]
 
 users.forEach((user)=>{

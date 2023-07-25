@@ -1,4 +1,5 @@
 import faker from './config.js'
+import config from '../utils/config.js'
 import { pickUniqRandom } from '../utils/common.js';
 import { SITES_ARRAY } from '../data/common.js';
 import { SECTIONS } from '../data/common.js';
@@ -62,6 +63,11 @@ for (let i = 0; i < 20; i++) {
 const beneficiaries = [];
 let j = 0
 for (const site of SITES_ARRAY) {
+  const availableSections = SECTIONS.filter((section) => {
+    if (section[1] == site[0]) return true
+    return false
+  })
+
   for (let i = 0; i < 100; i++) {
     j++
     const address = createAccomodation(site[1])
@@ -73,7 +79,11 @@ for (const site of SITES_ARRAY) {
     const supportedNumber = faker.number.int({ min: 0, max: 3 })
     const supported = pickUniqRandom(SUPPORTED, supportedNumber)
     const civility = pickUniqRandom(CIVILITY, 1)[0]
-    const name = civility == civility[0]
+    const pictureId = faker.number.int({ min: 1, max: 12 })
+    const picture = civility == 'Monsieur' 
+      ? `${config.domain}avatars/avatar-m-${pictureId}@2x.png` 
+      : `${config.domain}avatars/avatar-f-${pictureId}@2x.png`
+    const name = civility == 'Monsieur'
       ? `${faker.person.firstName('male')} ${faker.person.lastName()}`
       : `${faker.person.firstName('female')} ${faker.person.lastName()}`
 
@@ -92,7 +102,7 @@ for (const site of SITES_ARRAY) {
       siteName: site[0],
       oai: address[1],
       orifProduct: pickUniqRandom(PRODUCT, 1)[0],
-      section: pickUniqRandom(SECTIONS, 1)[0],
+      section: pickUniqRandom(availableSections, 1)[0][0],
       accommodation: address[0],
       originCountry: pickUniqRandom(COUNTRY, 1)[0],
       permit: pickUniqRandom(PERMIT, 1)[0],
@@ -104,7 +114,7 @@ for (const site of SITES_ARRAY) {
       legalRepresentative: pickUniqRandom(LEGALREPRESENTATIVE, 1)[0],
       advisor: pickUniqRandom(ADVISOR, 1)[0],
       supported: supported,
-      picture: faker.image.avatarGitHub()
+      picture: picture
     })
   }
 }

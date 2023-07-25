@@ -5,6 +5,7 @@ import { removePrivateField } from './utils/common.js'
 import { authRoute } from './routes/auth.js'
 import cors from 'cors'
 import authMiddleware from './middlewares/auth.js'
+import express from 'express'
 
 const corsOptions = {
   origin: ['http://localhost:4200', 'https://neos.sebastientraber.com'],
@@ -16,6 +17,7 @@ const server = jsonServer.create();
 server.use(cors(corsOptions))
 const router = jsonServer.router(data);
 const middlewares = jsonServer.defaults();
+server.use(express.static('public'));
 
 server.use(jsonServer.bodyParser)
 

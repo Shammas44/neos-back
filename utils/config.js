@@ -7,6 +7,7 @@ const config = {
   date: Date.now(),
   port: normalizePort(process.env.PORT || '3000'),
   apiName: process.env.API_NAME || 'api',
+  domain: process.env.DOMAIN || 'http://localhost:3000/',
   secretKey: process.env.SECRET_KEY,
   bcryptCostFactor: 10,
   nodeEnv: process.env.NODE_ENV,
