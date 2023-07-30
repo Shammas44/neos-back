@@ -26,7 +26,7 @@ const msp = collaborators.filter(collaborator => collaborator.role.includes('msp
 
 function pickCollaborators() {
   const numberOfCollaborators = faker.number.int({ min: 0, max: 4 })
-  const list = pickUniqRandom(collaborators, numberOfCollaborators);
+  const list = pickUniqRandom(msp, numberOfCollaborators);
   return list.map((collaborator) => {
     return `${collaborator.firstName} ${collaborator.lastName}`
   })
