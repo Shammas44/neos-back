@@ -9,7 +9,8 @@ import express from 'express'
 
 const corsOptions = {
   origin: ['http://localhost:4200', 'https://neos.sebastientraber.com'],
-  exposedHeaders: ['data-timestamp']
+  exposedHeaders: ['data-timestamp'],
+  methods: "*",
 }
 const apiPrefix = `/${config.apiName}`
 
