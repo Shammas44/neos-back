@@ -3,7 +3,6 @@
 __Installer le projet__
 
 ```bash
-content
 git clone https://github.com/Shammas44/neos-back
 cd neos-back
 npm i
