@@ -1,4 +1,4 @@
-# Neos Backend - REST API
+# Neos Backend - REST API - Instructions de démarrage
 
 __Installer le projet__
 
@@ -19,13 +19,13 @@ echo "DOMAIN=http://localhost:3000/" >> .env
 - 📚 `SECRET_KEY` - la seed utilisé pour générer les donées
 - 📚 `DOMAIN` - l'url de base de l'api (port inclus)
 
-__Démarre le serveur express en mode développement__
+__Démarrer le serveur express en mode développement__
 
 ```bash
 npm run dev
 ```
 
-__Démarre le serveur express en mode production__
+__Démarrer le serveur express en mode production__
 
 ```bash
 npm run start
