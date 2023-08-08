@@ -1,0 +1,445 @@
+{
+	"info": {
+		"_postman_id": "88887838-554c-41f6-a91a-1cfc9fe12ff6",
+		"name": "neos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20787779"
+	},
+	"item": [
+		{
+			"name": "collaborators",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/collaborators",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"collaborators"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cda",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Origin",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{API_URL}}/cda",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"cda"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auth",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Origin",
+						"value": "https://mybank.com",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"Admin.Admin@orif.ch\",\n    \"password\": \"adad\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/auth",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"auth"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pre-flight",
+			"request": {
+				"method": "OPTIONS",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}",
+					"host": [
+						"{{API_URL}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tasks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/tasks?collaboratorId.value=lepe&_sort=term.value&_order=asc",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"tasks"
+					],
+					"query": [
+						{
+							"key": "collaboratorId.value",
+							"value": "lepe"
+						},
+						{
+							"key": "_sort",
+							"value": "term.value"
+						},
+						{
+							"key": "_order",
+							"value": "asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "favorites",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/favorites?data.userId.value=lepe",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"favorites"
+					],
+					"query": [
+						{
+							"key": "data.userId.value",
+							"value": "lepe"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "favorites",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"__id__\": \"1000\",\n    \"name\": {\n        \"value\": \"test\",\n        \"label\": \"nom\",\n        \"type\": \"string\"\n    },\n    \"url\": {\n        \"value\": \"https://developers.google.com/\",\n        \"label\": \"url\",\n        \"type\": \"string\"\n    },\n    \"userId\": {\n        \"value\": \"lepe\",\n        \"label\": \"identifiant du collaborateur\",\n        \"type\": \"tags\"\n    },\n    \"tag\": {\n        \"value\": [\n            \"other\"\n        ],\n        \"label\": \"tag\",\n        \"type\": \"tags\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/favorites",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"favorites"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/favorites?data.userId.value=lepe&_sort=data.userId.value&_order=asc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"favorites"
+					],
+					"query": [
+						{
+							"key": "data.userId.value",
+							"value": "lepe"
+						},
+						{
+							"key": "_sort",
+							"value": "data.userId.value"
+						},
+						{
+							"key": "_order",
+							"value": "asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "favorites",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/favorites/1",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"favorites",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "newsheaders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "newsbody",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bills",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "accounts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "beneficiaries",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logbookevents",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/logbookevents",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"logbookevents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dashboards",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/dashboards",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"dashboards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "errors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/errors",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"errors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "helps",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "picture",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"",
+					"  pm.sendRequest({",
+					"    url: 'http://localhost:3000/api/auth',",
+					"    method: 'POST',",
+					"    header: {",
+					"        'content-type': 'application/json'",
+					"    },",
+					"    body: {",
+					"        mode: 'raw',",
+					"        raw: JSON.stringify({ email:\"Admin.Admin@orif.ch\",password:\"adad\" })",
+					"    }",
+					"}, (err, res) => {",
+					"    console.log(res)",
+					"    pm.collectionVariables.set(\"TOKEN\", res.json().token)",
+					"    });",
+					"  "
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "TOKEN",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "API_URL",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
