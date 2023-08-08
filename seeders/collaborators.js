@@ -35,7 +35,7 @@ function getCollaboratorFactory(sex,firstName, lastName, optionalRole) {
     getCollaborator: function() {
       const id = `${this.firstName[0]}${this.firstName[1]}${this.lastName[0]}${this.lastName[1]}`.toLowerCase()
       const birthday = faker.date.past({ years: 40, refDate: "2003-01-01T00:00:00.000Z" }).getTime()
-      const role = optionalRole || ROLES_ARRAY[Math.floor(Math.random() * ROLES_ARRAY.length)]
+      const role = optionalRole || ROLES_ARRAY[faker.number.int({ min: 0, max: ROLES_ARRAY.length - 1 })]
       const presence = PRESENCE[Math.floor(Math.random() * PRESENCE.length)]
       const email = `${this.firstName}.${this.lastName}@orif.ch`
 
